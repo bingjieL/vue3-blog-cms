@@ -2,7 +2,7 @@
  * @Description: axios 封装
  * @Author: bjl
  * @Date: 2021-04-25 17:16:10
- * @LastEditTime: 2021-05-07 19:16:39
+ * @LastEditTime: 2021-05-08 15:54:09
  * @LastEditors: bjl
  */
 
@@ -55,8 +55,10 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (respone: AxiosResponse) => {
-    loadingInstanceSum -= 1;
-    if ( loadingInstanceSum === 0) {
+    if (loadingInstanceSum !== 0) {
+     loadingInstanceSum -= 1;
+    }
+    if (loadingInstanceSum === 0) {
       loadingInstance.close();
     }
     return respone;
