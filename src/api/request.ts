@@ -2,7 +2,7 @@
  * @Description: axios 封装
  * @Author: bjl
  * @Date: 2021-04-25 17:16:10
- * @LastEditTime: 2021-05-06 17:17:12
+ * @LastEditTime: 2021-05-07 19:16:39
  * @LastEditors: bjl
  */
 
@@ -30,14 +30,16 @@ const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    loadingInstance =  ElLoading.service({
-      lock: true,
-      text: '加载中...',
-      spinner: 'el-icon-loading',
-      background: 'rgba(250, 250, 250, 0.1)',
-      customClass: 'bj-loading',
-    });
-    loadingInstanceSum += 1;
+    if (!config.data ||  !config.data.noLoading) {
+      loadingInstance =  ElLoading.service({
+        lock: true,
+        text: '加载中...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(250, 250, 250, 0.1)',
+        customClass: 'bj-loading',
+      });
+      loadingInstanceSum += 1;
+    }
     const userData: any = window.localStorage.getItem('bj_blog_userData');
     if (userData) {
       config.headers.Authorization = `Bearer ${JSON.parse(userData).token}`;

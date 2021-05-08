@@ -2,7 +2,7 @@
   <section class="bj-page">
     <page-title :title="data.pagetype === 'add' ? '类型 Add' : '类型 Edit'"></page-title>
     <section class="page-content">
-      <el-form :model="data.addData" :rules="rules" :ref="addFormRef" label-position='left' label-width="100px" class="page-form">
+      <el-form :model="data.addData" :rules="rules" :ref="(el) =>  addFormRef = el" label-position='left' label-width="100px" class="page-form">
         <el-form-item label="类型标题" prop="blogTypeTitle">
           <el-input v-model="data.addData.blogTypeTitle" placeholder='类型标题'></el-input>
         </el-form-item>
@@ -81,11 +81,16 @@ export default defineComponent({
     }
 
     const handleSave = () => {
-      if (data.pagetype === 'add') {
-        blogTypeSave()
-      } else {
-        blogTypeUpdate()
-      }
+      addFormRef.value!.validate((validate: boolean) => {
+        if (validate) {
+          if (data.pagetype === 'add') {
+            blogTypeSave()
+          } else {
+            blogTypeUpdate()
+          }
+        }
+      })
+      
     }
     const handleCancel = () => {
       goList()

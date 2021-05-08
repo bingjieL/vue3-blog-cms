@@ -7,6 +7,7 @@
       :right-toolbar='rightToolbar'
       :disabled-menus="[]"
       @upload-image="handleUploadImage"
+      @fullscreen-change='handleFullscreen'
     />
   </section>
 </template>
@@ -22,12 +23,16 @@ export default defineComponent({
       default: '',
     }
   },
+  emits: ['update:modelValue', 'fullscreenChange'],
   setup(props, { emit }) {
     const $message = getCurrentInstance()?.appContext.config.globalProperties.$message;
     const leftToolbar: string = 'undo redo clear | emoji tip image | h bold italic strikethrough quote | ul ol table hr link code';
     const rightToolbar: string = 'preview toc sync-scroll fullscreen';
     const editorValue = ref<string>('');
-
+    // 全屏
+    const handleFullscreen = (isFullscreen: boolean) => {
+      emit('fullscreenChange', isFullscreen)
+    }
     // 上传图片
     const handleUploadImage = (event: Event, insertImage: any, files: File[]) => {
       console.log(files);
@@ -73,6 +78,7 @@ export default defineComponent({
       rightToolbar,
       handleUploadImage,
       editorValue,
+      handleFullscreen,
     }
   },
 })

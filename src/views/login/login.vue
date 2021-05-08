@@ -21,15 +21,17 @@
 
 <script lang='ts'>
 
-import { defineComponent, getCurrentInstance, reactive, ref, ComponentPublicInstance } from 'vue';
+import { defineComponent, getCurrentInstance, reactive, ref, ComponentPublicInstance, onMounted } from 'vue';
 import { ElForm } from 'element-plus';
 import { LoginData } from './login.vue.d';
 import { Apilogin } from '@/api/login';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { useKeyDown } from '@/useHook/useKeyDown';
 
 export default defineComponent({
   setup(props, ctx) {
+    
     const vm = getCurrentInstance()
     const router = useRouter()
     const store = useStore()
@@ -55,7 +57,7 @@ export default defineComponent({
         if (valid) {
           submitLoading.value = true;
           Apilogin(loginData).then((res: any) => {
-            console.log('>>>> res', res)
+            // console.log('>>>> res', res)
             const { token, userName, } = res;
             const storeParams = { token, userName, isLogin: true}
             window.localStorage.setItem('bj_blog_userData', JSON.stringify(storeParams))
@@ -67,6 +69,11 @@ export default defineComponent({
         }
       })
     }
+
+    // 监控 enter键
+    useKeyDown((e: Event) => {
+      handleLogin()
+    }, 'enter')
 
     return {
       loginFormRef,

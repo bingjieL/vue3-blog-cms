@@ -2,7 +2,7 @@
   <section class="bj-page">
     <page-title :title="data.pagetype === 'add' ? '热门项目 Add' : '热门项目 Edit'"></page-title>
     <section class="page-content">
-      <el-form :model="data.addData" :rules="rules" label-position='left' :ref="addFormRef" label-width="100px" class="page-form">
+      <el-form :model="data.addData" :rules="rules" label-position='left' :ref="(el) =>  addFormRef = el" label-width="100px" class="page-form">
         <el-form-item label="项目标题" prop="hotTitle">
           <el-input v-model="data.addData.hotTitle" placeholder='项目标题'></el-input>
         </el-form-item>
@@ -97,11 +97,15 @@ export default defineComponent({
     }
 
     const handleSave = () => {
-      if (data.pagetype === 'add') {
-        hotSwiperSave()
-      } else {
-        hotSwiperUpdate()
-      }
+      addFormRef.value!.validate((validate: boolean) => {
+        if (validate) {
+          if (data.pagetype === 'add') {
+            hotSwiperSave()
+          } else {
+            hotSwiperUpdate()
+          }
+        }
+      })
     }
     const handleCancel = () => {
       goList()

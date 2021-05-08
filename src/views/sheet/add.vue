@@ -2,7 +2,7 @@
   <section class="bj-page">
     <page-title :title="data.pagetype === 'add' ? 'Sheet Add' : 'Sheet Edit'"></page-title>
     <section class="page-content">
-      <el-form :model="data.addData" :rules="rules" :ref="addFormRef" label-position='left' label-width="100px" class="page-form">
+      <el-form :model="data.addData" :rules="rules" :ref="(el) =>  addFormRef = el" label-position='left' label-width="100px" class="page-form">
         <el-form-item label="歌单标题" prop="sheetTitle">
           <el-input v-model="data.addData.sheetTitle" placeholder='歌单标题'></el-input>
         </el-form-item>
@@ -116,11 +116,16 @@ export default defineComponent({
     }
 
     const handleSave = () => {
-      if (data.pagetype === 'add') {
-        sheetSave()
-      } else {
-        sheetUpdate()
-      }
+      addFormRef.value!.validate((validate: boolean) => {
+        if (validate) {
+          if (data.pagetype === 'add') {
+            sheetSave()
+          } else {
+            sheetUpdate()
+          }
+        }
+      })
+      
     }
     const handleCancel = () => {
       goList()
