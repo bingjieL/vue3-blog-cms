@@ -12,7 +12,6 @@ const userInfo = {
   },
   mutations: {
     changeUserInfo(state: any, params: any) {
-      console.log('tst')
       Object.assign(state, params);
     },
   },

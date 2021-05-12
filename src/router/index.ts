@@ -22,6 +22,9 @@ const SheetAdd = () => import('../views/sheet/add.vue');
 const BlogTypeList = () => import('../views/blogType/list.vue');
 const BlogTypeAdd = () => import('../views/blogType/add.vue');
 
+const MusicList = () => import('../views/music/list.vue');
+const MusicAdd = () => import('../views/music/add.vue');
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
@@ -153,6 +156,33 @@ const routes: Array<RouteRecordRaw> = [
           title: '项目新增',
         },
         component: HotSwiperAdd,
+      },
+    ],
+  },
+  {
+    path: '/music',
+    name: 'music',
+    component: Layout,
+    redirect: '/music/list',
+    meta: {
+      title: '音乐管理',
+      icon: 'el-icon-headset',
+    },
+    children: [
+      {
+        path: '/music/list',
+        name: 'musicList',
+        meta: {
+          title: '音乐列表',
+        },
+        component: MusicList,
+      }, {
+        path: '/music/add',
+        name: 'musicAdd',
+        meta: {
+          title: '音乐新增',
+        },
+        component: MusicAdd,
       },
     ],
   },

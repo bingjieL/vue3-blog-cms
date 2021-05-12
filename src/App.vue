@@ -14,9 +14,7 @@ export default defineComponent({
     }
   },
   setup() {
-    
     const vm = getCurrentInstance()
-    console.log('vm', vm)
   },
   
 }) 
