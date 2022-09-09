@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent, ref, watchEffect, Ref, getCurrentInstance, watch} from 'vue';
 import { useTest } from '@/useHook/useTest';
-
+console.log('>>> 功能b',)
 export default defineComponent({
   name: 'App',
   data() {
