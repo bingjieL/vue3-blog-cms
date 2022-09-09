@@ -11,6 +11,8 @@ import VmdEditor from './utils/installVmdEditor';
 // v-md-editor
 
 console.log('>>>> c1 ===> end')
+console.log('>>>> c2 ===> end')
+
 
 const app = createApp(App);
 
