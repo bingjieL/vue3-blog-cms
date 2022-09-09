@@ -46,7 +46,7 @@ export default defineComponent({
     const router = useRouter();
     const $message = getCurrentInstance()?.appContext.config.globalProperties.$message;
     
-    const addFormRef = ref<typeof ElForm | null>(null)
+    const addFormRef = ref<any>(null)
 
     const data = reactive<BannerData>({
       addData: {

@@ -14,6 +14,7 @@ export default defineComponent({
     }
   },
   setup() {
+    console.log('>>> bjl')
     const vm = getCurrentInstance()
   },
   

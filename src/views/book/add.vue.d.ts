@@ -5,7 +5,7 @@ export interface BookAddData {
   bookDes: string | null;
   bookpdfUrl: string | null;
   bookdlUrl: string | null;
-  bookPic: string | null;
+  bookPic: string | undefined;
   [propName: string]: any;
 }
 

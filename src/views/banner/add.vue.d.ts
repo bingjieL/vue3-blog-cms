@@ -1,7 +1,7 @@
 
 export interface BannerAddData {
   bannerTitle: string | null;
-  bannerImg: string | null;
+  bannerImg: string;
   [propName: string]: any;
 }
 
